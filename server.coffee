@@ -14,25 +14,25 @@ app.use logger()
 
 route= new Router()
 
-route.get '/', ->
+route.get '/sse', ->
     @type= 'text/html; charset=utf-8'
     @body= fs.createReadStream "#{__dirname}/index.html"
     yield return
 
-route.get '/rewardhandle', ->
-    console.log 'hahha00000'
+route.get '/sse/rewardhandle', ->
     @req.setTimeout Number.MAX_VALUE
     @type= 'text/event-stream; charset=utf-8'
 
     @set 'Cache-Control', 'no-cache'
     @set 'Connection', 'keep-alive'
+    @set 'X-Accel-Buffering', 'no'
 
     # local config
     #@body= subscribe {
     #    channels: ['rewardlist']
     #    retry: 10000
-    #    host: '123.56.255.225'
-    #    port: 6379
+    #    host: '10.171.131.37'
+    #    port: 16379
     #    redisdb: 15
     #    channelsAsEvents: true
     #}
@@ -40,8 +40,8 @@ route.get '/rewardhandle', ->
         channels: ['rewardlist']
         retry: 10000
         ioredis: {
-          host: '10.170.168.191'
-          port: 19736
+          host: '10.171.131.37'
+          port: 16379
           db: 15
         }
         channelsAsEvents: true

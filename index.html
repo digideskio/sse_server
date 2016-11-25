@@ -37,7 +37,7 @@
     <!-- <script src='touch.js'></script> -->
     <script type="text/javascript">
       $(function() {
-        var source = new EventSource('/stream');
+        var source = new EventSource('/sse/rewardhandle');
         var $list = $('ul');
         // when channelsAsEvents is true, you can listen to specific events...
         source.addEventListener('rewardlist', handleMessage, false);
